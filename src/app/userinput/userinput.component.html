@@ -1,0 +1,50 @@
+<!-- <div>
+    <form>
+        <div>
+            <label for="userName" class="form-label">userName</label>
+            <input type="text" class="form-control" id="userName"  title="userName" >
+        </div>
+    </form>
+</div> -->
+<div class="container mt-4">
+    <form [formGroup]="userForm" (submit)="collectUserData()">
+        <!-- UserName.............................. -->
+        <div class="mb-3">
+            <label for="userName" class="form-label">userName</label>
+            <input type="text" class="form-control" id="userName"  title="userName" formControlName="userName" >
+        </div>
+       <br>
+        <!-- email................... -->     
+        <div class="mb-3">
+            <label for="email" class="form-label">email</label>
+            <input type="email" class="form-control" id="email" title="email" formControlName="email" >
+        </div>
+
+    <!-- number-->
+        <div class="mb-3">
+            <label for="contactNo" class="form-label">contactNo </label>
+            <input type="number" class="form-control" id="contactNo"  title="contactNo" formControlName="contactNo">         
+        </div>
+
+        <!-- password.......................... -->
+        <div class="mb-3">
+            <label for="numberOfProducts" class="form-label">password</label>
+            <input type="password" class="form-control" id="password"  title="password" formControlName="password" >
+        </div>
+
+        <!-- confirmPassword.......................................... -->
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">confirmPassword</label>
+            <input type="password" class="form-control" id="confirmPassword"  title="confirmPassword" formControlName="confirmPassword" >
+        </div>
+
+        <!-- Category Image.................................. -->
+        <!-- <div class="mb-3">...........................
+            <label for="categoryImage" class="form-label">Category Image</label>
+            <input type="file" class="form-control" id="categoryImage" title="categoryImage" formControlName="categoryImage" accept="image/*" required>
+        </div> ......................... -->
+
+        <!-- Submit Button.................... -->
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
