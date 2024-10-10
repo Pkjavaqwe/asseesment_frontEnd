@@ -1,0 +1,30 @@
+<p>paperinput works!</p>
+<div class="container mt-4">
+    <form [formGroup]="paperForm" (submit)="collectData()">
+      <!-- Paper Name -->
+      <div class="form-group">
+        <label for="paperName">Paper Name</label>
+        <input
+          id="paperName"
+          type="text"
+          class="form-control"
+          formControlName="paperName"
+          placeholder="Enter paper name"
+        />
+      </div>
+  
+      <!-- Subject ID -->
+      <div class="form-group mt-3">
+        <label for="subjectId">Subject ID</label>
+        <input
+          id="subjectId"
+          type="text"
+          class="form-control"
+          formControlName="subjectId"
+          placeholder="Enter subject ID"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    </form>
+  </div>
+  

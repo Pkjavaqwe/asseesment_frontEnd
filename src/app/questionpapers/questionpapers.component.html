@@ -1,1 +1,11 @@
-
+<div>
+    <ul>
+        <li *ngFor="let quePaper of questionPapers" >
+            <a [routerLink]="['/questions/',quePaper._id]">{{quePaper.paperName}}</a>
+        </li>
+      </ul>
+</div>
+<div>
+    <p>To add question paper </p>
+    <a [routerLink]="['/questionpapersadd',subject_id]" >click here</a>
+</div>

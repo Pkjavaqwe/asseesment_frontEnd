@@ -4,6 +4,7 @@ import { User } from '../customclasses/user';
 import { Observable, Subject } from 'rxjs';
 import { Subjects } from '../customclasses/subjects';
 import { Questions } from '../customclasses/questions';
+import { Questionpapers } from '../customclasses/questionpapers';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +34,30 @@ export class UserService {
     return data
   }
 
-  callgetQuesionpaperBySubjectId(subject_id:string):Observable<Questions[]>{
-    const data = this.http.get<Questions[]>(this.baseUrl+"/que/get/"+subject_id)
+  callgetQuesionpaperBySubjectId(subject_id:string):Observable<Questionpapers[]>{
+    const data = this.http.get<Questionpapers[]>(this.baseUrl+"/quepaper/get/"+subject_id)
     console.log("data",data);
     return data
   }
 
+  callgetQuestionsByquestionId(subject_id:string):Observable<Questions[]>{
+    const data = this.http.get<Questions[]>(this.baseUrl+"/que/get/"+subject_id)
+    console.log("data",data);
+    return data
+  }
   
+  calladdQuestionpapers(questionPaper:Questionpapers):Observable<Questionpapers>{
+    return this.http.post<Questionpapers>(this.baseUrl+"/subjects/questionpaper/add",questionPaper)
+  }
+
+  calladdQuestion(question:Questions):Observable<Questions>{
+    return this.http.post<Questions>(this.baseUrl+"/subjects/questionpaper/question/add",question)
+  }
+
+
+  calladdSubject(subject:Subjects):Observable<Subjects>{
+    return this.http.post<Subjects>(this.baseUrl+"/subjects/add",subject)
+  }
 }
 
 

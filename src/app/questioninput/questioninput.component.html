@@ -1,0 +1,25 @@
+<form [formGroup]="questionForm" (submit)="collectQuestionData()" class="p-4 bg-light border rounded">
+    <div class="form-group mb-3">
+      <label for="questionBody">Question Body</label>
+      <textarea class="form-control" id="questionBody" formControlName="questionBody" placeholder="Enter question body"></textarea>
+    </div>
+  
+    <div class="form-group mb-3">
+      <label for="type">Question Type</label>
+      <select class="form-control" id="type" formControlName="type">
+        <option *ngFor="let t of questionTypes" [value]="t">{{ t }}</option>
+      </select>
+    </div>
+  
+    <div class="form-group mb-3">
+      <label for="choices">Choices</label>
+      <textarea class="form-control" id="choices" formControlName="choices" placeholder="Enter choices, separated by commas"></textarea>
+    </div>
+  
+    <div class="form-group mb-3">
+      <label for="marksAlloted">Marks Allotted</label>
+      <input type="number" class="form-control" id="marksAlloted" formControlName="marksAlloted" placeholder="Enter marks">
+    </div>  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  

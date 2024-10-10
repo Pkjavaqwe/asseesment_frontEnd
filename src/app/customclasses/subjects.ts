@@ -1,7 +1,7 @@
 export class Subjects {
     constructor(
-       public title="",
-       public userId={},
-       public _id=""
+       public title:string="",
+       public userId:string|null="",
+       public _id?:string
     ){}
 }

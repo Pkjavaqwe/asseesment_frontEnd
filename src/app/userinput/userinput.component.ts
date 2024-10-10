@@ -27,8 +27,8 @@ export class UserinputComponent {
    get userName(){
     return this.userForm.get('userName')
    }
-   get emai(){
-    return this.userForm.get('emai')
+   get email(){
+    return this.userForm.get('email')
    }get contactNo(){
     return this.userForm.get('contactNo')
    }get password(){

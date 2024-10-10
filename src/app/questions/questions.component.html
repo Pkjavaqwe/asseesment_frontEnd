@@ -1,0 +1,13 @@
+
+<div>
+    <ul>
+        <li *ngFor="let ques of questions" >
+            <p>que1</p>
+            <a [routerLink]="['/questions/',ques._id]">{{ques.questionBody}}</a>
+            <button [routerLink]="['/questions/updatequestion/',ques._id]">update</button>
+            <button>delete</button>
+        </li>
+      </ul>
+      <p>To add question</p>
+      <a [routerLink]="['/questionsadd/',questionPaper_id]">click here</a>
+</div>
