@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../customclasses/user';
 import { Observable, Subject } from 'rxjs';
 import { Subjects } from '../customclasses/subjects';
+import { Questions } from '../customclasses/questions';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,14 @@ export class UserService {
       return data
   }
 
-  callgetSubjectsByUserId(user_id:string):Observable<any[]>{
-    const data = this.http.get<any[]>(this.baseUrl+"/sub/get/"+user_id)
+  callgetSubjectsByUserId(user_id:string):Observable<Subjects[]>{
+    const data = this.http.get<Subjects[]>(this.baseUrl+"/sub/get/"+user_id)
+    console.log("data",data);
+    return data
+  }
+
+  callgetQuesionpaperBySubjectId(subject_id:string):Observable<Questions[]>{
+    const data = this.http.get<Questions[]>(this.baseUrl+"/que/get/"+subject_id)
     console.log("data",data);
     return data
   }

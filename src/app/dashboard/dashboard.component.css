@@ -1,0 +1,9 @@
+.nav-bar{
+    display:flex;
+    justify-content:space-between;
+
+}
+.buttonLogout{
+    background-color: blueviolet;
+   
+}

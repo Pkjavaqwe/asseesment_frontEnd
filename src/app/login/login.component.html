@@ -4,6 +4,7 @@
         <h3 class="mb-0">Admin Login</h3>
       </div>
       <small class="text-danger"></small>
+     
       <form [formGroup]="loginForm" (submit)="collectloginData()">
         <div class="form-group mb-3">
           <label for="userName">Username</label>
@@ -20,12 +21,15 @@
           </small>
         </div>
         <div class="d-grid mb-3">
-          <button type="submit" class="btn btn-primary btn-block" [routerLink]="['/login/auth',userData._id]" (click)="loginUser()" >Login</button>
+          <button type="submit" class="btn btn-primary btn-block" (click)="loginUser()" >Login</button>
+        </div>
+        <div>
+          <small class="text-danger">{{errorMessage}}</small>
         </div>
         <div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="--bs-scroll-height: 100px;">
                 <li class="nav-item">
-                  <a class="nav-link active"  routerLink="register">Register</a>
+                  <a class="nav-link active"  [routerLink]="['register',]">Register</a>
                 </li>
             </ul>
         </div>

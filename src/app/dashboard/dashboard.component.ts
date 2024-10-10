@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Subjects } from '../customclasses/subjects';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -9,37 +10,58 @@ import { Subjects } from '../customclasses/subjects';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
-   subjects:Subjects=[{  title: "",
-    userId: {},
-    questionPaper: []}]
+   subjects:Subjects[]=[{title:"",userId:"",_id:""}]
    subjectTitles:string[]=[]
-  routeUrl:string|undefined=""
-constructor(private extractParam:ActivatedRoute, private userCrud:UserService  ){
-  this.routeUrl = extractParam.snapshot.routeConfig?.path
-  const extractedUserId = this.extractParam.snapshot.paramMap.get('_id')
-  if (extractedUserId!=null) {
-    const userId = extractedUserId
-    console.log("userId",userId);
-    const obsUserId = userCrud.callgetSubjectsByUserId(userId)
-    obsUserId.subscribe({
-      next:(data)=>{console.log("subData",data)
-        this.subjects=data
-        console.log("type",typeof data);
-        console.log("length", data.length);
-        console.log("subjectValue", );
-        console.log();
+   subjectIds:string[]=[]
+  // routeUrl:string|undefined=""
+  emptyToken:string|null=localStorage.getItem('token')
+  // tokenPresent = JSON.stringify(localStorage.getItem("token"))
 
-       for(let eachdata of data){
-        // this.subjectTitles=[]
-        this.subjectTitles.push(eachdata['title'])
-       }
-      },
-      error:(err)=>console.log(err)
-    })
-  }
 
+constructor(private extractParam:ActivatedRoute, private userCrud:UserService, private route:Router  ){
 }
 
+ngOnInit():void{
+  if (this.emptyToken!=null) {
+    // this.routeUrl = this.extractParam.snapshot.routeConfig?.path
+    console.log("tokenPresent",this.emptyToken);
+    const extractedUserId = this.extractParam.snapshot.paramMap.get('_id')
+    if (extractedUserId!=null) {
+      const userId = extractedUserId
+      console.log("userId",userId);
+      const obsUserId = this.userCrud.callgetSubjectsByUserId(userId)
+      obsUserId.subscribe({
+        next:(data)=>{console.log("subData",data)
+          this.subjects=data
+          console.log("type",typeof data);
+          console.log("length", data.length);
+          console.log("subjectValue",this.subjects );
+          console.log();
+  
+         for(let eachdata of data){
+          // this.subjectTitles=[]
+          this.subjectTitles.push(eachdata['title'])
+         }
+        },
+        error:(err)=>console.log(err)
+      })
+    }
+  }else{
+    this.route.navigate(['']);
+  }
+}
 
+logout(){
+  localStorage.removeItem('token');
+  this.emptyToken = localStorage.getItem('token')
+  console.log("emptyToken",this.emptyToken);
+  
+  if (!this.emptyToken) {
+    this.route.navigate(['']);
+  }else{
+    console.log("no the token is not removed")
+  }
+  
+}
 
 }

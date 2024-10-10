@@ -1,7 +1,7 @@
 export class Subjects {
     constructor(
-        title="",
-          userId={},
-          questionPaper=[]
+       public title="",
+       public userId={},
+       public _id=""
     ){}
 }

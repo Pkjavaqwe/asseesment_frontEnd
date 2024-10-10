@@ -1,3 +1,15 @@
-<div *ngFor="let title of subjectTitles" >
-    <div>{{title}}</div>
-</div>
+
+<div class="container">
+    <header>
+      <div class="nav-bar">
+        <h2>Subjects</h2>
+        <button class="buttonLogout" (click)="logout()">Logout</button>
+      </div>
+    </header>
+      <ul>
+        <li *ngFor="let subject of subjects" >
+            <a [routerLink]="['/questionpapers',subject._id]">{{subject.title}}</a>
+        </li>
+      </ul>
+  </div>
+  <!-- [routerLink]="['/subject', subject.id]" -->
