@@ -8,6 +8,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { QuestioninputComponent } from './questioninput/questioninput.component';
 import { PaperinputComponent } from './paperinput/paperinput.component';
 import { SubjectinputComponent } from './subjectinput/subjectinput.component';
+import { authGuards } from './guards/authguards';
 
 const routes: Routes = [
  {
@@ -20,33 +21,39 @@ const routes: Routes = [
   },
   {
     path:'login/auth/:_id',
-    component:DashboardComponent
+    component:DashboardComponent,
+  
   },
   {
     path:'questionpapers/:_id',
-    component:QuestionpapersComponent
+    component:QuestionpapersComponent,
+    
   },
   {
     path:'questionpaperss',
-    component:QuestionpapersComponent
+    component:QuestionpapersComponent,
+   
   },
   {
     path:'questions/:_id',
-    component:QuestionsComponent
+    component:QuestionsComponent,
+  
   },
   {
     path:'questionsadd/:_id',
-    component:QuestioninputComponent
+    component:QuestioninputComponent,
+    
   },
   {
     path:'questionpapersadd/:_id',
-    component:PaperinputComponent
+    component:PaperinputComponent,
+    
   },
   {
     path:'subjectsadd/:_id',
-    component:SubjectinputComponent
+    component:SubjectinputComponent,
+    
   }
-
 ];
 
 @NgModule({

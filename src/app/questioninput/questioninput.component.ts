@@ -45,7 +45,11 @@ export class QuestioninputComponent {
   }
 
   collectQuestionData(){
-     console.log(this.questionForm);
+     console.log("question-Form",this.questionForm);
+    //  if(this.questionForm.value.choices)
+    // if(){
+
+    // }
      const formchoicesArrayed = {
       ...this.questionForm.value,
       choices: this.questionForm.value.choices.split(',').map((choice: string) => choice.trim()), 
@@ -56,14 +60,11 @@ export class QuestioninputComponent {
     const quepapId =  this.extractParam.snapshot.paramMap.get('_id')      
     this.questionn.questionId = quepapId
     console.log("changedquestionBody",this.questionn);
-    
     if(this.routeUrl?.includes('questionsadd')) {
       console.log("in if of CollectQuestionData");
           this.addQuestion()
-    } else {
-     
+    } else {     
     }
-     
   }
   addQuestion(){
     console.log("in addQuestion");
@@ -73,7 +74,6 @@ export class QuestioninputComponent {
     questionAddObs.subscribe({
       next:(data)=>{console.log(data);
         console.log("addQuestion subscribe");
-        
       },
       error:(error)=>{console.log("error",error);
       }

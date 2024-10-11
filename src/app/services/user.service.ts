@@ -58,6 +58,11 @@ export class UserService {
   calladdSubject(subject:Subjects):Observable<Subjects>{
     return this.http.post<Subjects>(this.baseUrl+"/subjects/add",subject)
   }
+
+  callgetUserById(userId:string):Observable<User>{
+    return this.http.get<User>(this.baseUrl+"/byid/"+userId)
+
+  }
 }
 
 

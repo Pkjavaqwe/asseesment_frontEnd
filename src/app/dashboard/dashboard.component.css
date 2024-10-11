@@ -7,3 +7,9 @@
     background-color: blueviolet;
    
 }
+.nosubject{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

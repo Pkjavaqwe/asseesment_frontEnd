@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { Subjects } from '../customclasses/subjects';
+import { User } from '../customclasses/user';
 
 
 @Component({
@@ -14,18 +15,28 @@ export class DashboardComponent {
    subjectTitles:string[]=[]
    subjectIds:string[]=[]
    UserIdToPassToAddSubject:string|null=""
+   totalSubjects:number=0
+   loggedInUser:User={
+    userName: '',
+    email: '',
+    contactNo: 0,
+    password: '',
+    confirmPassword: '',
+    _id: ''
+  }
   // routeUrl:string|undefined=""
   emptyToken:string|null=""
   // tokenPresent = JSON.stringify(localStorage.getItem("token"))
 
-
+  noSubjectYetMsg:string=""
 constructor(private extractParam:ActivatedRoute, private userCrud:UserService, private route:Router  ){
-
 }
 
 ngOnInit():void{
+  this.findGetById()
   this.emptyToken=localStorage.getItem('token')
   this.UserIdToPassToAddSubject = this.extractParam.snapshot.paramMap.get('_id')
+
   if (this.emptyToken!=null) {
     // this.routeUrl = this.extractParam.snapshot.routeConfig?.path
     console.log("tokenPresent",this.emptyToken);
@@ -39,8 +50,12 @@ ngOnInit():void{
           this.subjects=data
           console.log("type",typeof data);
           console.log("length", data.length);
+          if(data.length==0){
+            this.noSubjectYetMsg="No subject Yet"
+          }
+          this.totalSubjects=data.length
           console.log("subjectValue",this.subjects );
-          console.log();
+          // console.log();
   
          for(let eachdata of data){
           // this.subjectTitles=[]
@@ -65,7 +80,26 @@ logout(){
   }else{
     console.log("no the token is not removed")
   }
-  
 }
+
+findGetById(){
+  const extractedUserId = this.extractParam.snapshot.paramMap.get('_id')
+  if(extractedUserId!=null){
+    const obs = this.userCrud.callgetUserById(extractedUserId)
+    obs.subscribe({
+      next:(data)=>{
+        console.log("user data by Id",data);
+        this.loggedInUser=data
+      },
+      error:(error)=>{
+        console.log("userById",error);
+        
+      }
+    })
+  }
+}
+
+
+
 
 }

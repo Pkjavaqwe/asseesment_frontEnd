@@ -1,8 +1,17 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h3>welcome {{loggedInUser.userName}} to the dashboard</h3>
 <div class="container">
     <header>
       <div class="nav-bar">
         <h2>Subjects</h2>
+        <h3>Total Subjects:{{totalSubjects}}</h3>
         <button class="buttonLogout" (click)="logout()">Logout</button>
       </div>
     </header>
@@ -12,9 +21,14 @@
         </li>
       </ul>
   </div>
+  <div class="nosubject" *ngIf="totalSubjects==0">
+    <h1>{{noSubjectYetMsg}}</h1>
+  </div>
   <div>
     <p>To Add subject</p>
     <a [routerLink]="['/subjectsadd/',UserIdToPassToAddSubject]" >click here</a>
   </div>
+</body>
+</html>
   
   <!-- [routerLink]="['/subject', subject.id]" -->

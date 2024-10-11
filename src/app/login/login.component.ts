@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Login } from '../customclasses/login';
 import { User } from '../customclasses/user';
 import { JwtauthService } from '../services/jwtauth.service';
@@ -30,9 +30,16 @@ export class LoginComponent {
 constructor(private authService:JwtauthService,private userCrud:UserService, private route :Router){
  
   this.loginForm=new FormGroup({
-    userName:new FormControl(this.login.userName),
-    password:new FormControl(this.login.password) 
+    userName:new FormControl(this.login.userName,[Validators.required]),
+    password:new FormControl(this.login.password,[Validators.required]) 
   })
+}
+
+get userName(){
+  return this.loginForm.get("userName")
+}
+get password(){
+  return this.loginForm.get("password")
 }
 collectloginData(){
   // console.log(this.userForm)
