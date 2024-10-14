@@ -52,7 +52,10 @@ const routes: Routes = [
   {
     path:'subjectsadd/:_id',
     component:SubjectinputComponent,
-    
+  },
+  {
+    path:'questions/updatequestion/:_id',
+    component:QuestioninputComponent,
   }
 ];
 

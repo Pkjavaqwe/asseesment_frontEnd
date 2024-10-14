@@ -63,6 +63,29 @@ export class UserService {
     return this.http.get<User>(this.baseUrl+"/byid/"+userId)
 
   }
+
+  calldeleteSubjectById(subId:string):Observable<Object>{
+    console.log(" in calldeleteSubjectById service");
+    console.log(" in calldeleteSubjectById service-",subId);
+      return this.http.delete<Object>(this.baseUrl+"/delete/"+subId)
+  }
+
+  calldeleteQuestionById(questionId:string):Observable<Object>{
+    console.log(" in calldeleteQuestionById service");
+    console.log(" in calldeleteQuestionById service-",questionId);
+      return this.http.delete<Object>(this.baseUrl+"/deleteque/"+questionId)
+  }
+
+  callgetQuestionById(questionId:string):Observable<Questions>{
+    return this.http.get<Questions>(this.baseUrl+"/getque/"+questionId)
+  }
+
+  callUpdateQuestion(question:Questions):Observable<Object>{
+    console.log("in callUpdateQuestion service",question );
+    return this.http.put<Object>(this.baseUrl+"/updateque/"+question._id,question)
+  }
+ 
 }
+
 
 

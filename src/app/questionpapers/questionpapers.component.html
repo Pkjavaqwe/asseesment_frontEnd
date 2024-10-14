@@ -1,7 +1,7 @@
 <div>
     <h3>Question Papers</h3>
     <ul>
-        <li *ngFor="let quePaper of questionPapers" >
+        <li class="questionsPaperStyle" *ngFor="let quePaper of questionPapers" >
             <a [routerLink]="['/questions/',quePaper._id]">{{quePaper.paperName}}</a>
         </li>
       </ul>

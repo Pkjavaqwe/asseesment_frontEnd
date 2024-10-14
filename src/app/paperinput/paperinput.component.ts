@@ -32,21 +32,20 @@ export class PaperinputComponent {
     return this.paperForm.get('_id')
   }
 
-
   collectData(){
-       console.log(this.paperForm.value.paperName);
+    console.log(this.paperForm.value.paperName);
     this.paper.paperName=this.paperForm.value.paperName
-    const subjectId =  this.extractParam.snapshot.paramMap.get('_id')  
-    this.paper.subjectId = subjectId 
-    if(this.routeUrl?.includes('questionsadd')) {
+    const subjectIdFromParam =  this.extractParam.snapshot.paramMap.get('_id')  
+    this.paper.subjectId = subjectIdFromParam 
+    if(this.routeUrl?.includes('questionpapersadd')) {
       console.log("in collectData if")
           this.addPaper()
     } else {
-     
     }
   }
 
   addPaper(){
+    console.log("in addPaper ");
     const {_id,...partialPaper}=this.paper
     const paperAddedObservable = this.questionCrud.calladdQuestionpapers(partialPaper)
     paperAddedObservable.subscribe({

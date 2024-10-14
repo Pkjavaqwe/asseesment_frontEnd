@@ -6,20 +6,27 @@
   <title>Document</title>
 </head>
 <body>
-  <h3>welcome {{loggedInUser.userName}} to the dashboard</h3>
+  <div class="pageHeading">
+    <h3>welcome {{loggedInUser.userName}} to the dashboard</h3>
+    <button class="buttonLogout" (click)="logout()">Logout</button>
+  </div>
+
 <div class="container">
     <header>
-      <div class="nav-bar">
+      <div class="bar">
         <h2>Subjects</h2>
         <h3>Total Subjects:{{totalSubjects}}</h3>
-        <button class="buttonLogout" (click)="logout()">Logout</button>
       </div>
     </header>
+    <div >
       <ul>
-        <li *ngFor="let subject of subjects" >
-            <a [routerLink]="['/questionpapers',subject._id]">{{subject.title}}</a>
+        <li class="subField"  *ngFor="let subject of subjects" >
+            <a  [routerLink]="['/questionpapers',subject._id]">{{subject.title}}</a>
+            <button (click)="deleteSubject(subject._id)">DELETE</button>
         </li>
       </ul>
+    </div>
+     
   </div>
   <div class="nosubject" *ngIf="totalSubjects==0">
     <h1>{{noSubjectYetMsg}}</h1>

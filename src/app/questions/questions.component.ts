@@ -41,4 +41,28 @@ export class QuestionsComponent {
           error:(err)=>console.log(err)
         }) 
       }
+
+      deleteQuestion(queId:string|undefined){
+        const deleteAns=confirm("Do you really want to delete?")
+        if(deleteAns){
+            if(queId!=undefined){
+                  const obsDelete = this.userCrud.calldeleteQuestionById(queId)
+                  console.log("obsDelete====",obsDelete);
+              obsDelete.subscribe({
+                  next:(obj)=>{
+                    console.log(obj)
+                    window.alert("question deleted successfully")
+                    // this.getSubjectByUsersId(this.userId)
+                    this.fetchQuestionByPaperId(this.questionPaper_id)
+                  },
+                    error:(err)=>{
+                      console.log(err);
+                      window.alert("something went wrong deleting question...")   
+                    }
+              })
+          }  
+        }
+      } 
+
+     
 }

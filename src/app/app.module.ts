@@ -16,6 +16,15 @@ import { QuestionsComponent } from './questions/questions.component';
 import { PaperinputComponent } from './paperinput/paperinput.component';
 import { QuestioninputComponent } from './questioninput/questioninput.component';
 import { SubjectinputComponent } from './subjectinput/subjectinput.component';
+import {MatButtonModule} 
+from 
+'@angular/material/button';
+import {MatIconModule} 
+from 
+'@angular/material/icon';
+import {MatListModule} 
+from 
+'@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -35,7 +44,9 @@ import { SubjectinputComponent } from './subjectinput/subjectinput.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
+    
   ],
   providers: [provideHttpClient(),/* {
     provide: HTTP_INTERCEPTORS,

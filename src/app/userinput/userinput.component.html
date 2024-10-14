@@ -12,39 +12,56 @@
         <div class="mb-3">
             <label for="userName" class="form-label">userName</label>
             <input type="text" class="form-control" id="userName"  title="userName" formControlName="userName" >
+            <div class="text-end" *ngIf="userName?.touched">
+                <small class="text-danger" *ngIf="userName?.hasError('required')">Username is required</small>
+                <small class="text-danger" *ngIf="userName?.hasError('minlength')">Username must be at least 3 characters</small>
+                <small class="text-danger" *ngIf="userName?.hasError('maxlength')">Username must not exceed 20 characters</small>
+                <small class="text-danger" *ngIf="userName?.hasError('pattern')">Username can only contain letters and numbers</small>
+            </div>
         </div>
        <br>
         <!-- email................... -->     
         <div class="mb-3">
             <label for="email" class="form-label">email</label>
             <input type="email" class="form-control" id="email" title="email" formControlName="email" >
+            <div class="text-end" *ngIf="email?.touched">
+                <div *ngIf="email?.hasError('required')">
+                  <small class="text-danger">
+                    email is required
+                  </small></div>
+               </div>
         </div>
 
     <!-- number-->
         <div class="mb-3">
             <label for="contactNo" class="form-label">contactNo </label>
             <input type="number" class="form-control" id="contactNo"  title="contactNo" formControlName="contactNo">         
+            <div class="text-end" *ngIf="contactNo?.touched && contactNo?.invalid">
+                <small class="text-danger" *ngIf="contactNo?.hasError('required')">Contact number is required</small>
+                <small class="text-danger" *ngIf="contactNo?.hasError('pattern')">Invalid contact number format</small>
+            </div>
         </div>
 
         <!-- password.......................... -->
         <div class="mb-3">
             <label for="numberOfProducts" class="form-label">password</label>
             <input type="password" class="form-control" id="password"  title="password" formControlName="password" >
+            <div class="text-end" *ngIf="password?.touched">
+                <small class="text-danger" *ngIf="password?.hasError('required')">Password is required</small>
+                <small class="text-danger" *ngIf="password?.hasError('minlength')">Password must be at least 8 characters</small>
+               </div>
         </div>
 
         <!-- confirmPassword.......................................... -->
         <div class="mb-3">
             <label for="confirmPassword" class="form-label">confirmPassword</label>
             <input type="password" class="form-control" id="confirmPassword"  title="confirmPassword" formControlName="confirmPassword" >
+            <div class="text-end" *ngIf="confirmPassword?.touched && confirmPassword?.invalid">
+                <small class="text-danger" *ngIf="confirmPassword?.hasError('required')">Confirm Password is required</small>
+                <small class="text-danger" *ngIf="confirmPassword?.hasError('noMatch')">Passwords do not match</small>
+            </div> 
         </div>
-
-        <!-- Category Image.................................. -->
-        <!-- <div class="mb-3">...........................
-            <label for="categoryImage" class="form-label">Category Image</label>
-            <input type="file" class="form-control" id="categoryImage" title="categoryImage" formControlName="categoryImage" accept="image/*" required>
-        </div> ......................... -->
-
         <!-- Submit Button.................... -->
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary" >Register</button>
     </form>
 </div>

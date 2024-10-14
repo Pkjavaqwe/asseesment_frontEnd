@@ -7,29 +7,38 @@
 </head>
 <body>
     <div>
-        <h3>total Markes: {{totalMarks}}</h3>
+        <h4>total Markes: {{totalMarks}}</h4>
+        <h4>total questions:{{totalQuestions}}</h4>
     </div>
     <div>
+        <div>
+            <p>To add question</p>
+            <a [routerLink]="['/questionsadd/',questionPaper_id]">click here</a>
+          </div>
         <ul>
-            <li *ngFor="let ques of questions" >
-                <p>que1</p>
-                <p>{{ques.questionBody}}</p>
-                <h4>Marks: {{ques.marksAlloted}}</h4>
-                <p *ngIf="ques.choices.length>1">
+            <li *ngFor="let ques of questions; let nueNo=index" >
+                <p class="queNo">que{{nueNo+1}}:-</p>
+                <div class="questionStyle">
+                    <p>{{ques.questionBody}}</p>
+                    <div class="buttons">
+                        <button  mat-raised-button color="accent" [routerLink]="['/questions/updatequestion/',ques._id]">update</button>
+                        <button  mat-raised-button color="accent" (click)="deleteQuestion(ques._id)"  >Delete</button>
+                    </div>
+                </div>
+                <p class="marks">Marks: {{ques.marksAlloted}}</p>
+                <p class="choices" *ngIf="ques.choices.length>1">
                     <small *ngFor="let eachCoice of ques.choices">
                         {{eachCoice}}
                     </small>
                 </p>
-                <button [routerLink]="['/questions/updatequestion/',ques._id]">update</button>
-                <button>delete</button>
             </li>
           </ul>
-          <p>To add question</p>
-          <a [routerLink]="['/questionsadd/',questionPaper_id]">click here</a>
+         
+      
     </div>
-    <div *ngIf="totalQuestions==0" >
+    <!-- <div *ngIf="totalQuestions==0" >
         <h3>No Question Yet</h3>
-    </div>
+    </div> -->
 </body>
 </html>
 <!-- [routerLink]="['/questions/',ques._id]" -->

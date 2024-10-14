@@ -15,9 +15,18 @@ export class QuestioninputComponent {
   questionn = new Questions()
   questionTypes: string[] = ["mcq", "descriptive"]
   routeUrl?:string|undefined=""
+  // questionIdToPatch:string|null=""
   constructor(private extractParam:ActivatedRoute, private questionCrud:UserService, private route:Router){
 
     this.routeUrl=extractParam.snapshot.routeConfig?.path
+    
+    const idFromParams=extractParam.snapshot.paramMap.get('_id')
+    if (this.routeUrl?.includes('updatequestion')) {
+      if (idFromParams!=null) {
+        this.getQuestionById(idFromParams)
+      }
+    }
+    
     this.questionForm=new FormGroup({
       questionBody: new FormControl(this.questionn.questionBody),
        type: new FormControl(this.questionn.type),
@@ -48,22 +57,40 @@ export class QuestioninputComponent {
      console.log("question-Form",this.questionForm);
     //  if(this.questionForm.value.choices)
     // if(){
-
+  
     // }
-     const formchoicesArrayed = {
-      ...this.questionForm.value,
-      choices: this.questionForm.value.choices.split(',').map((choice: string) => choice.trim()), 
-     };
+    // if(this.questionForm.value.paperName!=""){
+      
+    // }
+    let formchoicesArrayed = {
+      ...this.questionForm.value
+     }
+    if (this.questionForm.value.choices=="") {
+      formchoicesArrayed = {
+        ...this.questionForm.value,
+       };
+    } else {
+      formchoicesArrayed = {
+        ...this.questionForm.value,
+        choices: this.questionForm.value.choices.split(',').map((choice: string) => choice.trim()), 
+       };
+    }
+
     //  console.log(this.questionForm.value.paperName);
     // this.questionn=this.questionForm.value
     this.questionn=formchoicesArrayed
-    const quepapId =  this.extractParam.snapshot.paramMap.get('_id')      
-    this.questionn.questionId = quepapId
     console.log("changedquestionBody",this.questionn);
     if(this.routeUrl?.includes('questionsadd')) {
+      const quepapId =  this.extractParam.snapshot.paramMap.get('_id')      
+      this.questionn.questionId = quepapId
       console.log("in if of CollectQuestionData");
           this.addQuestion()
-    } else {     
+    } else { 
+      const questionId = this.extractParam.snapshot.paramMap.get('_id')   
+      if (questionId!=null) {
+        this.getQuestionById(questionId)
+      this.updateQuestion()   
+      }
     }
   }
   addQuestion(){
@@ -77,6 +104,37 @@ export class QuestioninputComponent {
       },
       error:(error)=>{console.log("error",error);
       }
+    })
+  }
+  getQuestionById(queId:string|null){
+    if(queId!=null){
+       const obs = this.questionCrud.callgetQuestionById(queId)
+       obs.subscribe({
+        next:(question)=>{
+          console.log("questionFetched",question);
+          this.questionForm.patchValue(question)
+        },
+        error:(err=>{
+          console.log(err);
+          window.alert("something went wrong while fetching one Question")        
+        })
+      })
+    }
+  }
+
+  updateQuestion(){
+    console.log("question in update",this.questionn)
+    const obsUpdate = this.questionCrud.callUpdateQuestion(this.questionn)
+    obsUpdate.subscribe({
+     next:(obj)=>{
+       console.log(obj);
+       window.alert(`Employee with id ${this.questionn._id} updated successfully....`)
+       this.route.navigate([]);
+     },
+     error: (err)=>{
+       console.log(err); 
+       window.alert("something went wrong while updating...")
+     }
     })
   }
 }

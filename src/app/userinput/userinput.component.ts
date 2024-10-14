@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { User } from '../customclasses/user';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { Customvalidator } from '../customclasses/customvalidator';
 // import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-userinput',
@@ -17,12 +18,17 @@ export class UserinputComponent {
   constructor(private extractParams : ActivatedRoute, private userCrud:UserService){
     this.routeUrl=extractParams.snapshot.routeConfig?.path
     this.userForm=new FormGroup({
-      userName:new FormControl(this.user.userName),
-      email:new FormControl(this.user.email),
-      contactNo:new FormControl(this.user.contactNo),
-      password:new FormControl(this.user.password),
-      confirmPassword:new FormControl(this.user.confirmPassword)
-    })
+      userName:new FormControl(this.user.userName,[ Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(20),
+              Validators.pattern('^[a-zA-Z0-9]+$')]),
+      email:new FormControl(this.user.email,[Validators.required]),
+      contactNo:new FormControl(this.user.contactNo,[ Validators.required,
+        Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')]),
+      password:new FormControl(this.user.password,[    Validators.required,
+        Validators.minLength(8),]),
+      confirmPassword:new FormControl(this.user.confirmPassword,[Validators.required])
+    },[Customvalidator.compare])
   }
    get userName(){
     return this.userForm.get('userName')
