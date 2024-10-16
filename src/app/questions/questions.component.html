@@ -12,6 +12,39 @@
     </div>
     <div>
         <div>
+            <label for="year">Select Year:</label>
+            <select id="year" [(ngModel)]="selectedYear" (change)="filterStatistics()">
+                <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+            </select>
+    
+            <button (click)="getWeeklyStats()">View Weekly Statistics</button>
+            <button (click)="getMonthlyStats()">View Monthly Statistics</button>
+        </div>
+        <div *ngIf="weeklyStats.length > 0">
+            <h4>Weekly Statistics</h4>
+            <ul>
+                <li *ngFor="let stat of weeklyStats">
+                   Week: {{stat._id}}
+                    <p *ngFor="let question of stat.questions">
+                        {{ question.questionBody }} 
+                    </p>
+                </li>
+            </ul>
+        </div>
+    
+        <div *ngIf="monthlyStats.length > 0">
+            <h4>Monthly Statistics</h4>
+            <ul>
+                <li *ngFor="let stat of monthlyStats">
+                    {{ monthNames[stat._id-1] }}
+                    <p *ngFor="let question of stat.questions">
+                         {{ question.questionBody }}
+                    </p>
+                    
+                </li>
+            </ul>
+        </div>
+        <div>
             <p>To add question</p>
             <a [routerLink]="['/questionsadd/',questionPaper_id]">click here</a>
         </div>
@@ -34,39 +67,7 @@
             </li>
           </ul>
     </div>
-    <div>
-        <label for="year">Select Year:</label>
-        <select id="year" [(ngModel)]="selectedYear" (change)="filterStatistics()">
-            <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
-        </select>
-
-        <button (click)="getWeeklyStats()">View Weekly Statistics</button>
-        <button (click)="getMonthlyStats()">View Monthly Statistics</button>
-    </div>
-    <div *ngIf="weeklyStats.length > 0">
-        <h4>Weekly Statistics</h4>
-        <ul>
-            <li *ngFor="let stat of weeklyStats">
-               Week: {{stat._id}}
-                <p *ngFor="let question of stat.questions">
-                    {{ question.questionBody }} questions added
-                </p>
-            </li>
-        </ul>
-    </div>
-
-    <div *ngIf="monthlyStats.length > 0">
-        <h4>Monthly Statistics</h4>
-        <ul>
-            <li *ngFor="let stat of monthlyStats">
-                {{ monthNames[stat._id-1] }}
-                <p *ngFor="let question of stat.questions">
-                     {{ question.questionBody }} questions added
-                </p>
-                
-            </li>
-        </ul>
-    </div>
+   
 
     <!-- <div *ngIf="totalQuestions==0" >
         <h3>No Question Yet</h3>

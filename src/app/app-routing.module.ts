@@ -13,48 +13,61 @@ import { authGuards } from './guards/authguards';
 const routes: Routes = [
  {
   path:'',
-  component:LoginComponent,
+  // component:LoginComponent,
+  loadChildren:()=>import("./login/login.module").then(m=>m.LoginModule)
+
  },
   {
     path:'register',
-    component:UserinputComponent,
+    // component:UserinputComponent,
+    loadChildren:()=>import("./userinput/userinput.module").then(m=>m.UserinputModule)
+
   },
   {
-    path:'login/auth/:_id',
-    component:DashboardComponent,
+    path:'login',
+    // component:DashboardComponent,
+    loadChildren:()=>import("./dashboard/dashboard.module").then(m=>m.DashboardModule)
   },
   {
-    path:'questionpapers/:_id',
-    component:QuestionpapersComponent,
-    
+    path:'questionpapers',
+    // component:QuestionpapersComponent,
+    loadChildren:()=>import("./questionpapers/questionpapers.module").then(m=>m.QuestionPaperModule)
   },
   {
     path:'questionpaperss',
     component:QuestionpapersComponent,
   },
   {
-    path:'questions/:_id',
-    component:QuestionsComponent,
+    path:'questions',
+    // component:QuestionsComponent,
+    loadChildren:()=>import("./questions/questions.module").then(m=>m.QuestionsModule)
+
   
   },
   {
-    path:'questionsadd/:_id',
-    component:QuestioninputComponent,
+    path:'questionsadd',
+    // component:QuestioninputComponent,
+    loadChildren:()=>import("./questioninput/questioninput.module").then(m=>m.QuestioninputModule)
+
 
     
   },
   {
-    path:'questionpapersadd/:_id',
-    component:PaperinputComponent,
+    path:'questionpapersadd',
+    // component:PaperinputComponent,
+    loadChildren:()=>import("./paperinput/paperinput.module").then(m=>m.PaperinputModule)
+
     
   },
   {
-    path:'subjectsadd/:_id',
-    component:SubjectinputComponent,
+    path:'subjectsadd',
+    // component:SubjectinputComponent,
+    loadChildren:()=>import("./subjectinput/subjectinput.module").then(m=>m.SubjectinputModule)
   },
   {
-    path:'questions/updatequestion/:_id',
-    component:QuestioninputComponent,
+    path:'questions',
+    // component:QuestioninputComponent,
+    loadChildren:()=>import("./questioninput/questioninput.module").then(m=>m.QuestioninputModule)
     // loadComponent:()=>import("./questioninput/questioninput.component").then(m=>m.QuestioninputComponent)
   },
 //  { path: 'lazyloading', loadChildren: () => import('./lazyloading/lazyloading.module').then(m => m.LazyloadingModule) }
