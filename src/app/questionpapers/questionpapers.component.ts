@@ -10,8 +10,9 @@ import { Questionpapers } from '../customclasses/questionpapers';
 })
 export class QuestionpapersComponent {
   subject_id:string = ""
-  
+  noQuestionPaperYet:string=""
   questionPapers:Questionpapers[]=[{paperName:"", subjectId:"",_id:""}]
+  totalQuestion:number=0
   constructor(private extractIdinParam:ActivatedRoute, private userCrud:UserService){
     const sub_id= extractIdinParam.snapshot.paramMap.get('_id')
     if(sub_id!=null){
@@ -25,6 +26,10 @@ export class QuestionpapersComponent {
       obsQuestion.subscribe({
         next:(questionPapersfetched)=>{console.log(questionPapersfetched);
         this.questionPapers=questionPapersfetched
+            if(questionPapersfetched.length==0){
+              this.totalQuestion=questionPapersfetched.length
+              this.noQuestionPaperYet="No QuestionPaper Yet"
+            }
         console.log("questionPaper",this.questionPapers);
         },
         error:(err)=>console.log(err)

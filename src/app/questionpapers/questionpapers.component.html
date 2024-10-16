@@ -8,5 +8,9 @@
 </div>
 <div>
     <p>To add question paper </p>
-    <a [routerLink]="['/questionpapersadd',subject_id]" >click here</a>
+    <a [routerLink]="['/questionpapersadd/',subject_id]" >click here</a>
+
+</div>
+<div class="noQuestion" *ngIf="totalQuestion==0" >
+    <h4>{{noQuestionPaperYet}}</h4>
 </div>

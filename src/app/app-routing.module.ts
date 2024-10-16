@@ -13,16 +13,15 @@ import { authGuards } from './guards/authguards';
 const routes: Routes = [
  {
   path:'',
-  component:LoginComponent
+  component:LoginComponent,
  },
   {
     path:'register',
-    component:UserinputComponent
+    component:UserinputComponent,
   },
   {
     path:'login/auth/:_id',
     component:DashboardComponent,
-  
   },
   {
     path:'questionpapers/:_id',
@@ -32,7 +31,6 @@ const routes: Routes = [
   {
     path:'questionpaperss',
     component:QuestionpapersComponent,
-   
   },
   {
     path:'questions/:_id',
@@ -42,6 +40,7 @@ const routes: Routes = [
   {
     path:'questionsadd/:_id',
     component:QuestioninputComponent,
+
     
   },
   {
@@ -56,7 +55,9 @@ const routes: Routes = [
   {
     path:'questions/updatequestion/:_id',
     component:QuestioninputComponent,
-  }
+    // loadComponent:()=>import("./questioninput/questioninput.component").then(m=>m.QuestioninputComponent)
+  },
+//  { path: 'lazyloading', loadChildren: () => import('./lazyloading/lazyloading.module').then(m => m.LazyloadingModule) }
 ];
 
 @NgModule({

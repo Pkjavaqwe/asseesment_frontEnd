@@ -29,6 +29,7 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
+    height: 80vh;
 }
 
 .container {
@@ -96,34 +97,3 @@ li {
     margin-top: 10px;
 }
 
-.choices small {
-    display: inline-block;
-    margin-right: 5px;
-    background-color: #e0e0e0;
-    padding: 2px 8px;
-    border-radius: 4px;
-}
-
-.add-question {
-    margin-top: 30px;
-}
-
-.add-question a {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.add-question a:hover {
-    background-color: #218838;
-}
-
-.no-questions {
-    text-align: center;
-    font-size: 1.2em;
-    color: #ff6f61;
-}

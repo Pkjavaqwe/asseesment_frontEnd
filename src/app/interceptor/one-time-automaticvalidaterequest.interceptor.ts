@@ -15,9 +15,11 @@ export const oneTimeAutomaticvalidaterequestInterceptor: HttpInterceptorFn = (re
         Authorization: `Bearer ${token}`
       }
     });
-
+    console.log(clonedRequest);
     // Pass the cloned request to the next handler
     return next(clonedRequest);
+
+    
   } else {
     // If no token, pass the original request to the next handler
     return next(req);

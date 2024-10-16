@@ -14,6 +14,14 @@ export class QuestionsComponent {
       totalMarks:number=0
       // noQuestionTet:string=""
       totalQuestions:number=0
+      selectedYear:number|null=null
+      availableYears: number[] = [2020, 2021, 2022, 2023, 2024]
+      monthNames: string[] = [
+        'January', 'February', 'March', 'April', 'May', 'June', 
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ]
+      weeklyStats: any[] = [];
+      monthlyStats: any[] = [];
       constructor(private extractIdinParam:ActivatedRoute, private userCrud:UserService){
         const que_id= extractIdinParam.snapshot.paramMap.get('_id')
         if(que_id!=null){
@@ -62,7 +70,27 @@ export class QuestionsComponent {
               })
           }  
         }
-      } 
+      }
+      
+      filterStatistics(){
+        if (this.selectedYear) {
+          this.getWeeklyStats();
+          this.getMonthlyStats();
+        }
+      }
+      getWeeklyStats(){
+        this.userCrud.getWeeklyStatistics(this.selectedYear).subscribe(stats => {
+          console.log("weeklyStats----",stats);
+          
+          this.weeklyStats = stats;
+        });
+      }
+      getMonthlyStats(){
+        this.userCrud.getMonthlyStatistics(this.selectedYear).subscribe(stats => {
+          console.log("monthlyStats",stats);
+          this.monthlyStats = stats;
+        });
+      }
 
      
 }

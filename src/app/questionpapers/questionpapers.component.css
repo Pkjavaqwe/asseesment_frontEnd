@@ -8,3 +8,9 @@
     border-radius: 4px
 
 }
+.noQuestion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 88vh);
+}

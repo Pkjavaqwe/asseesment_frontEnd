@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Questions } from '../customclasses/questions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { timestamp } from 'rxjs';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class QuestioninputComponent {
        choices:new FormControl(this.questionn.choices),
         marksAlloted: new FormControl(this.questionn.marksAlloted),
         questionId:new FormControl(this.questionn.questionId),
-         _id: new FormControl(this.questionn._id)
+         _id: new FormControl(this.questionn._id),
+         timestamp:new FormControl(this.questionn.timestamp),
     })
 
   }
@@ -51,6 +53,9 @@ export class QuestioninputComponent {
   }
   get questionId(){
     return this.questionForm.get('questionId')
+  }
+  get timestamp(){
+    return this.questionForm.get('timestamp')
   }
 
   collectQuestionData(){
@@ -112,6 +117,8 @@ export class QuestioninputComponent {
        obs.subscribe({
         next:(question)=>{
           console.log("questionFetched",question);
+          let dateCreated =question.timestamp
+          question.timestamp=dateCreated.slice(0,dateCreated.length-5)
           this.questionForm.patchValue(question)
         },
         error:(err=>{

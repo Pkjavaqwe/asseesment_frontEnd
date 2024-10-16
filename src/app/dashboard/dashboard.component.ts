@@ -15,7 +15,7 @@ export class DashboardComponent {
    subjectTitles:string[]=[]
    subjectIds:string[]=[]
    UserIdToPassToAddSubject:string|null=""
-   totalSubjects:number=0
+    totalSubjects:number=0
    loggedInUser:User={
     userName: '',
     email: '',
@@ -106,7 +106,6 @@ deleteSubject(subId:string|undefined){
 
 }
 getSubjectByUsersId(userId:string){
-  
   const obsUserId = this.userCrud.callgetSubjectsByUserId(userId)
   obsUserId.subscribe({
     next:(data)=>{console.log("subData",data)

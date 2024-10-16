@@ -17,8 +17,6 @@ export class UserService {
         return this.http.post<User>(this.baseUrl+'/add',user)
   }
 
-  
-
   getUserByAName(userName:string):Observable<User>{
     console.log("in serviceUser");
     
@@ -54,14 +52,12 @@ export class UserService {
     return this.http.post<Questions>(this.baseUrl+"/subjects/questionpaper/question/add",question)
   }
 
-
   calladdSubject(subject:Subjects):Observable<Subjects>{
     return this.http.post<Subjects>(this.baseUrl+"/subjects/add",subject)
   }
 
   callgetUserById(userId:string):Observable<User>{
     return this.http.get<User>(this.baseUrl+"/byid/"+userId)
-
   }
 
   calldeleteSubjectById(subId:string):Observable<Object>{
@@ -84,7 +80,14 @@ export class UserService {
     console.log("in callUpdateQuestion service",question );
     return this.http.put<Object>(this.baseUrl+"/updateque/"+question._id,question)
   }
- 
+  getWeeklyStatistics(year: number|null): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/weekly/${year}`);
+  }
+
+  // Method to get monthly statistics for a specific year
+  getMonthlyStatistics(year: number|null): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/monthly/${year}`);
+  }
 }
 
 
